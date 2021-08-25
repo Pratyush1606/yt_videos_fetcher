@@ -193,7 +193,6 @@ yt_videos_fetcher
 |    ├── tests.py
 |    ├── urls.py
 |    └── views.py
-|     
 ├── yt_videos_fetcher
 |   ├── __init__.py
 |   ├── settings.py

@@ -229,7 +229,7 @@ yt_videos_fetcher
 
 * For fetching videos from youtube, a loop is implemented which iterates over all `API KEYS` and if a key is found with daily quota left (Youtube API gives 10000 units per day to every client and a search query has 100 units cost, so it may be possible that an API KEY reach daily quota very early as the fetching is done continuously at every 10 seconds), then that key is used to fetch the videos data from Youtube API.
 
-* Everytime the function `fetch_videos_function`, for calling Youtube API Call is excuted by the scheduler, maximum `100` results are being fetched by making 2 calls (Youtube API sends the data in paginated form with maximum allowed results in one page being `50`). In every call, `50` results are fetched and this call is made for 2 pages, making the maximum number of results equal to `100`. These parameters can be changed in `fetch_videos_function` function present in `videos/views.py`.
+* Everytime the function `fetch_videos_function`, for calling Youtube API Call is excuted by the scheduler, maximum `100 results` are being fetched by making `2 calls` (Youtube API sends the data in paginated form with maximum allowed results in one page being `50`). In every call, `50 results` are fetched and this call is made for `2 pages`, making the maximum number of results equal to `100`. These parameters can be changed in `fetch_videos_function` function present in `videos/views.py`.
 
 * **Pagination** can be customized by modifying the parameters in `CustomPagination` class present in `videos/pagination.py`
 

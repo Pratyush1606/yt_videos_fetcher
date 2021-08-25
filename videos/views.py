@@ -8,6 +8,7 @@ from datetime import timedelta
 
 from videos.models import Video
 from videos.serializers import VideoSerializer
+from videos.pagination import CustomPagination, MyPaginationMixin
 
 API_KEY_LIST = settings.API_KEY_LIST
 
@@ -78,3 +79,17 @@ def fetch_videos_function():
             # All the required requests have been made and videos have been saved
             # So, this outer loop execution has to stop
             break
+
+class get_videos(APIView, MyPaginationMixin):
+    pagination_class = CustomPagination
+
+    def get(self, request):
+        videos = Video.objects.all()
+        page = self.paginate_queryset(videos)
+
+        if page is not None:
+            serializers = VideoSerializer(page, many=True)
+            return self.get_paginated_response(serializers.data)
+
+        serializers = VideoSerializer(videos, many=True)
+        return Response(data=serializers.data, status=status.HTTP_200_OK)

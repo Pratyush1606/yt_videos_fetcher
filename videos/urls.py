@@ -3,5 +3,6 @@ from videos import views
 
 app_name = "videos"
 urlpatterns = [
-    path('get_videos', views.get_videos.as_view(), name="get_videos")
+    path('get_videos', views.get_videos.as_view(), name="get_videos"),
+    path('search_videos', views.search_videos.as_view(), name="search_videos"),
 ]

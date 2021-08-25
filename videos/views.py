@@ -93,3 +93,58 @@ class get_videos(APIView, MyPaginationMixin):
 
         serializers = VideoSerializer(videos, many=True)
         return Response(data=serializers.data, status=status.HTTP_200_OK)
+
+class search_videos(APIView):
+
+    def search_algorithm(self, query):
+        videos = Video.objects.all()
+        corpus = VideoSerializer(videos, many=True).data
+        import nltk
+        # remove stop words and tokenize them (we probably want to do some more
+        # preprocessing with our text in a real world setting, but we'll keep
+        # it simple here)
+        stopwords = list(set(nltk.corpus.stopwords.words('english')))
+        words = set(nltk.corpus.words.words())
+        trim_non_english_chars = (lambda sent: " ".join(w for w in nltk.wordpunct_tokenize(sent) if w.lower() in words or not w.isalpha()))
+        
+        # Combining title and description altogether after trimming non english chars 
+        # and then removing stopwords
+        texts = [[word for word in trim_non_english_chars(video["title"]+" "+video["description"]).lower().split() if word not in stopwords] for video in corpus]
+
+        # # building a word count dictionary so we can remove words that appear only once
+        # word_count_dict = {}
+        # for text in texts:
+        #     for token in text:
+        #         word_count = word_count_dict.get(token, 0) + 1
+        #         word_count_dict[token] = word_count
+
+        # texts = [[token for token in text if word_count_dict[token] > 1] for text in texts]
+
+        video_id_score = []
+        query = [word for word in trim_non_english_chars(query).lower().split() if word not in stopwords]
+        from rank_bm25 import BM25Okapi
+        try:
+            bm25 = BM25Okapi(texts)
+            scores = list(bm25.get_scores(query))
+
+            # Storing query search score for all videos
+            for score, doc in zip(scores, corpus):
+                score = round(score, 3)
+                video_id_score.append([doc["id"], score])
+        except Exception as e:
+            return []
+
+        # Sorting videos based on the search score
+        video_id_score.sort(key=lambda x: x[1], reverse=True)
+        # Taking 20 most relevant searches
+        most_relevant_videos_id_list = [id for id, score in video_id_score[:20]]
+        return most_relevant_videos_id_list
+    
+    def get(self, request):
+        query = request.GET.get("query", None)
+        if(not query):
+            return Response(data=[], status=status.HTTP_200_OK)
+        most_relevant_videos_id_list = self.search_algorithm(query)
+        videos = Video.objects.filter(id__in=most_relevant_videos_id_list)
+        data = VideoSerializer(videos, many=True).data
+        return Response(data=data, status=status.HTTP_200_OK)

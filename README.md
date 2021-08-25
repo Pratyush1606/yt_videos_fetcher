@@ -155,11 +155,6 @@ GET {site}/videos/search_videos?query={string_to_be_searched}
 
     Use `pip3` if `pip` not working
 
-* Download all the dependencies
-
-    ```bash
-    pip install -r requirements.txt
-    ```
 
 * Make a ``base_settings.py`` file in the project folder directory (at the project settings.py level) and put all the ***API KEYS*** in a list `API_KEY_LIST` obtained from the Google API Console, Django ***SECRET_KEY*** and ***DEBUG*** mode as below
 

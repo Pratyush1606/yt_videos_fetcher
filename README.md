@@ -217,6 +217,8 @@ yt_videos_fetcher
     python manage.py runserver
     ```
 
+---
+
 ## **Customizations and Algorihtms Used**
 
 * For search query API, [***Rank-BM25***](https://pypi.org/project/rank-bm25/) module has been used, and the algorithm used for implementing the search is [***BM25Okapi***](https://en.wikipedia.org/wiki/Okapi_BM25). The query is searched for all the videos by running the algorithm on all the video's title and description and then the top **`20`** results are sent.

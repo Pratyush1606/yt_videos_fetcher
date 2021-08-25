@@ -177,7 +177,7 @@ GET {site}/videos/search_videos?query={string_to_be_searched}
 
 ### Before proceeding further, make sure ```Directory``` looks like
 
-```sh
+```
 yt_videos_fetcher
 ├── videos
 |    ├── migrations
@@ -216,7 +216,7 @@ yt_videos_fetcher
 
     Use `python3` if `python` not working
 
-    After this, you would see a new file named *db.sqlite3* in your parent folder
+    After this, you would see a new file named `db.sqlite3` in your parent folder
 
 * Run server
 

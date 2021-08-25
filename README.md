@@ -155,7 +155,6 @@ GET {site}/videos/search_videos?query={string_to_be_searched}
 
     Use `pip3` if `pip` not working
 
-
 * Make a ``base_settings.py`` file in the project folder directory (at the project settings.py level) and put all the ***API KEYS*** in a list `API_KEY_LIST` obtained from the Google API Console, Django ***SECRET_KEY*** and ***DEBUG*** mode as below
 
     ```python
@@ -168,7 +167,7 @@ GET {site}/videos/search_videos?query={string_to_be_searched}
 
   * Put at least one ***API KEY*** in `API_KEY_LIST` otherwise there won't be any entry in database
 
-  * For generating a Django SECRET_KEY, many different sites are there. This [site](https://miniwebtool.com/django-secret-key-generator/) can be used for quick reference.
+  * For generating a Django ***SECRET_KEY***, many different sites are there. This [site](https://miniwebtool.com/django-secret-key-generator/) can be used for quick reference.
 
 ### Before proceeding further, make sure ```Directory``` looks like
 

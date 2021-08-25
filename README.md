@@ -169,7 +169,7 @@ GET {site}/videos/search_videos?query={string_to_be_searched}
     SECRET_KEY = 'django-insecure-sifi0)i0$al(xa&p1uulpq)2-qxy!xcqw%a=-x$+*h**#6rrq'
     ```
 
-  * While putting `DEBUG = False`, remember to modify `ALLOWED_HOSTS`.
+  * While putting `DEBUG = False`, remember to modify `ALLOWED_HOSTS` (for just quick reference, modify as `ALLOWED_HOSTS = ['*']`)
 
   * Put at least one ***API KEY*** in `API_KEY_LIST` otherwise there won't be any entry in database
 

@@ -36,7 +36,6 @@ def save_videos(videos):
         serializer = VideoSerializer(data=data)
         if(serializer.is_valid()):
             serializer.save()
-    print(len(Video.objects.all()))
 
 def fetch_videos_function():
     url = "https://youtube.googleapis.com/youtube/v3/search"
@@ -46,16 +45,15 @@ def fetch_videos_function():
         "order": "date",
         "q": "cricket",
         "type": "video",
-        "maxResults": 2,   # Taking maximum of 50 results in one page (max allowed=50)
+        "maxResults": 50,   # Taking maximum of 50 results in one page (max allowed=50)
         "publishedAfter": publishedAfter,
         "key": API_KEY_LIST[0]
     }
-    no_of_pages = 10     # Taking only 2 pages (means total of 100 results)
+    no_of_pages = 2     # Taking only 2 pages (means total of 100 results)
     for API_KEY in API_KEY_LIST:
         params["key"] = API_KEY
         resp = requests.get(url, params=params)
         if(resp.status_code==200):
-            print(API_KEY)
             # It means that this API has not reached its daily quota 
             # and it can be used to make further requests
             # And once the required requests have been made, this outer loop execution will stop

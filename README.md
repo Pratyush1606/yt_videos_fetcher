@@ -222,3 +222,14 @@ yt_videos_fetcher
     ```sh
     python manage.py runserver
     ```
+
+## **Customizations and Algorihtms Used**
+
+* For search query API, [***Rank-BM25***](https://pypi.org/project/rank-bm25/) module has been used, and the algorithm used for implementing the search is [***BM25Okapi***](https://en.wikipedia.org/wiki/Okapi_BM25). The query is searched for all the videos by running the algorithm on all the video's title and description and then the top **`20`** results are sent.
+
+* For fetching videos from youtube, a loop is implemented which iterates over all `API KEYS` and if a key is found with daily quota left (Youtube API gives 10000 units per day to every client and a search query has 100 units cost, so it may be possible that an API KEY reach daily quota very early as the fetching is done continuously at every 10 seconds), then that key is used to fetch the videos data from Youtube API.
+
+* **Pagination** can be customized by modifying the parameters in `CustomPagination` class present in `videos/pagination.py`
+
+* The correspnding result in pagination can be obtained using the parameter `p`.
+Example url is `http://127.0.0.1:8000/videos/get_videos?p=2`

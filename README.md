@@ -64,8 +64,7 @@ Response will be in paginated form.
 
 ### **GET** /videos/search_videos
 
-This API returns the stored video data in a paginated response sorted in descending order of published datetime.
-
+This API is used to search the stored videos using their title and description using a search query.
 **Example Request**
 
 ```js

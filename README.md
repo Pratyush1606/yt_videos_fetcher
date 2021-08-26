@@ -65,6 +65,7 @@ Response will be in paginated form.
 ### **GET** /videos/search_videos
 
 This API is used to search the stored videos using their title and description using a search query.
+
 **Example Request**
 
 ```js

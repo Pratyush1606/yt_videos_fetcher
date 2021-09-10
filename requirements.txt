@@ -18,7 +18,7 @@ rank-bm25==0.2.1
 regex==2021.8.21
 requests==2.26.0
 six==1.16.0
-sqlparse==0.4.1
+sqlparse==0.4.2
 tqdm==4.62.2
 typing-extensions==3.10.0.0
 tzlocal==2.1

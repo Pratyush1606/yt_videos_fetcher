@@ -11,7 +11,7 @@ idna==3.2
 importlib-metadata==4.6.4
 joblib==1.0.1
 Markdown==3.3.4
-nltk==3.6.2
+nltk==3.6.5
 numpy==1.21.2
 pytz==2021.1
 rank-bm25==0.2.1
